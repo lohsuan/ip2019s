@@ -1,0 +1,13 @@
+
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0,0,512,512">
+
+
+  <ellipse fill="white" stroke="black" stroke-width="5"  cx="200" cy="192" rx="100" ry="85"/>
+  <ellipse fill="black"  cx="150" cy="197" rx="7" ry="12"/>
+  <ellipse fill="black"  cx="250" cy="197" rx="7" ry="12"/>
+  <ellipse fill="black"  cx="200" cy="225" rx="12" ry="8"/>
+  <polygon fill="white" stroke="black" stroke-width="4" points="120,140 150,120 122,100"/>
+  <polygon fill="white" stroke="black" stroke-width="4" points="275,135 245,115 265,95"/>
+
+
+</svg>

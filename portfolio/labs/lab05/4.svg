@@ -1,0 +1,10 @@
+
+<svg version="1.1" baseProfile="full" xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0,0,512,512">
+
+
+  <ellipse fill="white" stroke="black" stroke-width="5"  cx="200" cy="192" rx="100" ry="80"/>
+  <circle fill="black"  cx="160" cy="200" r="15"></circle>
+  <circle fill="black"  cx="240" cy="200" r="15"></circle>
+  <rect  x="155" y="195" fill="black" width="80" height="6"/>
+
+</svg>
