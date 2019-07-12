@@ -40,7 +40,7 @@ function analyze() {
       var subs2=subs.replace('440','480');
       var subs2=subs2.replace('462','262');
 
-      var path = image.path(subs).fill('black').stroke({color:'gray',width:5}).draggable();
+      var path = image.path(subs).fill('blue').stroke({color:'gray',width:5}).draggable();
 
       path.plot(subs2).draggable();
       //path.animate(2000).plot(subs2).loop(true,true).draggable();
@@ -159,8 +159,14 @@ function analyze() {
       }
 
       */
+
+      $('#b1').on('click',function(){
+        var path = image.path(subs).fill('pink').stroke({color:'gray',width:5}).draggable();
+      });
+
     } while (m > 0);
 }
+
 
 function saveText(text, filename) {
   var a = document.createElement('a');
