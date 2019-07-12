@@ -25,3 +25,8 @@ div {
     text-align: center;
     color: #bbb;
 }
+
+.noborder{
+    border: none;
+
+}

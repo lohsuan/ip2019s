@@ -23,11 +23,16 @@ function analyze() {
         return;
       }
 
-      m = remain.search(/m/i);
-      console.log('m = ' + m);
+      m=remain.search('d=');
+      console.log('d=  m= '+m);
+      remain = remain.slice(m);
 
-      n = remain.search('z"'); // /z/i
-      console.log('n = ' + n);
+      m = remain.search(/m/i);
+      console.log('m  m= ' + m);
+
+      n = remain.search(/z/i); // /z/i
+      console.log('z  n= ' + n);
+
 
       subs = remain.slice(m, n+1); // z 也要包含
       console.log('subs = ' + subs);
@@ -35,16 +40,50 @@ function analyze() {
       var subs2=subs.replace('440','480');
       var subs2=subs2.replace('462','262');
 
-      var path = image.path(subs).fill('none').stroke({color:'red',width:5}).draggable();
+      var path = image.path(subs).fill('black').stroke({color:'gray',width:5}).draggable();
 
+      path.plot(subs2).draggable();
+      //path.animate(2000).plot(subs2).loop(true,true).draggable();
       remain = remain.slice(n+1); // z 也要移除
-      //console.log('remain = ' + remain);
-      
+      var newPath = Snap.path.toCubic(subs);
+      console.log('newPath.length= ' +newPath.length);
+      //
+
+      newPath.forEach( function(element) {
+        console.log(element);
+      });
+
+      for(var i=0;i<newPath.length -1;i++){
+        for(var j=0;j<newPath[i].length;j++){
+          console.log(' newPath[' +i+ '][j] = '+ newPath[i][j] );
+        }
+
+        //
+        if(i==0){
+          var circle = image.circle(20).fill('red').stroke('blue').move(newPath[i][1]-10,newPath[i][2]-10).draggable();
+        } else{
+          var circle = image.circle(10).fill('pink').stroke('blue').move(newPath[i][1]-5,newPath[i][2]-5).draggable();
+          var circle = image.circle(10).fill('pink').stroke('blue').move(newPath[i][3]-5,newPath[i][4]-5).draggable();
+          var circle = image.circle(10).fill('pink').stroke('blue').move(newPath[i][5]-5,newPath[i][6]-5).draggable();
+        }
+      }
+
+      /*
+      //
+      //
+      for(var i =0; i<(newPath.length -1); i++){
+        var segment = newpath[i],point;
+
+        segment.shift();
+        point = setUpPoint(segment);
+      }
+      */
       //var pathString = "M382 371C440 281 80 162 82 314 84 467 324 462 382 371z"
       //var newPath = Snap.path.toCubic(pathString);
 
       var newPath = [];
-      var move = '';
+
+
 
       m = subs.search(/c/i);
       console.log('m = subs.search(/c/i);');
@@ -55,20 +94,26 @@ function analyze() {
       console.log('n = ' + n);
 
 
+      //
+      var move = '';
       move = subs.slice(1, m);
       console.log('move.length = ' + move.length);
       console.log('move = ' + move);
 
+      move=move.replace(',', ' ');
+      console.log('move.length= ' + move.length);
+      console.log('move = '+move);
+
+
       // https://stackoverflow.com/questions/40282519/split-string-by-multiple-spaces-nodejs
       var temp;
       temp = move.trim().split(/\s+/);
+
       console.log('temp.length = ' + temp.length);
       console.log('temp = ' + temp);
       console.log('temp[0] = ' + temp[0]);
       console.log('temp[1] = ' + temp[1]);
 
-
-      
       var x, y;
       x = parseInt(temp[0],10);
       y = parseInt(temp[1],10);
@@ -84,6 +129,7 @@ function analyze() {
       */
 
       console.log('newPath = ' + newPath);
+
 
       subs = subs.slice(m+1, n);  // C 也要移除 (大寫C), z 也要移除 
       console.log('subs = ' + subs);
@@ -177,6 +223,24 @@ function handleDragOver(evt) {
 }
 
 function start(e) {
+
+  $(document).mousemove(function(event){
+    var p =$("#svgimage2");
+
+    var position = p.position();
+
+    console.log('position = '+ position.left+', '+position.top);
+    var myX = event.pageX - Math.round(position.left);
+    var myY = event.pageY - Math.round(position.top)+500;
+
+    $("#s5").html("<div style='position:absolute; border-style:none; TOP:"
+        +event.pageY + "px;LEFT:"
+        +event.pageX+"px;'>" +"&nbsp&nbsp&nbsp&nbsp("
+        +myX +", "
+        +myY +")"
+        +"</div>");
+  });
+
 
   document.getElementById('files').addEventListener('change', handleFileSelect, false);
 
